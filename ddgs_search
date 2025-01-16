@@ -1,0 +1,6 @@
+import sys
+from duckduckgo_search import DDGS
+
+query = sys.argv[1]
+results = DDGS().text(query)
+print(results)
