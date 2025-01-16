@@ -121,3 +121,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📊 Project Status
 
 Currently in active development. Check the [Issues](https://github.com/yourusername/nutrition-app/issues) page for planned features and known bugs.
+# food-app
