@@ -4,6 +4,30 @@ const { authenticateToken } = require('../middleware/auth');
 module.exports = function(aiService) {
     const router = express.Router();
 
+    // Chat endpoint
+    router.post('/chat', authenticateToken, async (req, res) => {
+        try {
+            const { message } = req.body;
+            if (!message) {
+                return res.status(400).json({ error: 'Message is required' });
+            }
+
+            const userContext = {
+                healthProfile: req.user.healthProfile,
+                preferences: req.user.preferences
+            };
+
+            const response = await aiService.generateChatResponse(message, userContext);
+            res.json({ response });
+        } catch (error) {
+            console.error('Error in chat:', error);
+            res.status(500).json({ 
+                error: 'Failed to generate response',
+                message: error.message 
+            });
+        }
+    });
+
     // Analyze diet
     router.post('/analyze-diet', authenticateToken, async (req, res) => {
         try {
